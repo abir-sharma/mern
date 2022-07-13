@@ -1,0 +1,108 @@
+import { createReducer } from "@reduxjs/toolkit";
+
+export const userReducer=createReducer({
+    user:{},
+},{
+    REGISTER_USER_REQUEST:(state,action)=>{
+        state.loading=true
+        state.isAuthenticated=false
+    },
+    LOGIN_REQUEST:(state,action)=>{
+        state.loading=true
+        state.isAuthenticated=false
+    },
+    REGISTER_USER_SUCCESS:(state,action)=>{
+        state.loading=false
+        state.isAuthenticated=true
+        state.user=action.payload
+        localStorage.setItem("user",true)
+    },
+    LOGIN_SUCCESS:(state,action)=>{
+        state.loading=false
+        state.isAuthenticated=true
+        state.user=action.payload
+        localStorage.setItem("user",true)
+    },
+    REGISTER_USER_FAIL:(state,action)=>{
+        state.loading=false
+        state.isAuthenticated=false
+        state.user=null
+        state.error=action.payload
+    },
+    LOGIN_FAIL:(state,action)=>{
+        state.loading=false
+        state.isAuthenticated=false
+        state.user=null
+        state.error=action.payload
+    },
+    LOGOUT_SUCCESS:(state,action)=>{
+        state.loading=false
+        state.user=null
+        state.isAuthenticated=false
+        localStorage.removeItem("user")
+    },
+    LOGOUT_FAIL:(state,action)=>{
+        state.loading=false
+        state.error=action.payload
+    }, 
+    CLEAR_ERRORS:(state,action)=>{
+        state.error=null
+    }
+})
+
+export const userDetailsReducer=createReducer({user:{}},{
+    USER_DETAILS_REQUEST:(state,action)=>{
+       state.loading=true
+    },
+    USER_DETAILS_SUCCESS:(state,action)=>{
+       state.loading=false
+       state.user=action.payload
+    },
+    USER_DETAILS_FAIL:(state,action)=>{
+       state.loading=false
+       state.error=action.payload
+    },
+    CLEAR_ERRORS:(state,action)=>{
+        state.error=null
+    }
+})
+
+export const profileReducer=createReducer({},{
+    UPDATE_PROFILE_REQUEST:(state,action)=>{
+        state.loading=true
+    },
+    UPDATE_PASSWORD_REQUEST:(state,action)=>{
+        state.loading=true
+    },
+    DELETE_USER_REQUEST:(state,action)=>{
+        state.loading=true
+    },
+    UPDATE_PROFILE_SUCCESS:(state,action)=>{
+        state.loading=false
+        state.isProfileUpdated=action.payload
+    },
+    UPDATE_PASSWORD_SUCCESS:(state,action)=>{
+        state.loading=false
+        state.isPasswordUpdated=action.payload
+    },
+    DELETE_USER_SUCCESS:(state,action)=>{
+       state.loading=false
+       state.isDeleted=action.payload.success
+       state.message=action.payload.message
+    },
+    UPDATE_PROFILE_FAIL:(state,action)=>{
+        state.loading=false
+        state.error=action.payload
+    },
+    UPDATE_PASSWORD_FAIL:(state,action)=>{
+        state.loading=false
+        state.error=action.payload
+    },
+    DELETE_USER_FAIL:(state,action)=>{
+        state.loading=false
+        state.error=action.payload
+    },
+    CLEAR_ERRORS:(state,action)=>{
+        state.error=null
+    }
+})
