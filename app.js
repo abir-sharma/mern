@@ -11,7 +11,7 @@ app.use(cors())
 const errorMiddleware=require('./backend/middleware/error')
 
 if (process.env.NODE_ENV!=="PRODUCTION"){
-    require("dotenv").config({path:"backend/config/config.env"})
+    require("dotenv").config({path:"config/config.env"})
 }
 
 const post=require("./backend/routes/postRoute")
